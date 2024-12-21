@@ -1,6 +1,12 @@
 from django.db import models
 from django.utils.timezone import now
 
+
+class WorkplaceType(models.Model):
+    name = models.CharField(max_length=255, unique=True)
+    
+    def __str__(self):
+        return self.name
 class Job(models.Model):
     id = models.CharField(max_length=40, primary_key=True)
 
@@ -30,7 +36,6 @@ class Job(models.Model):
     modified_date = models.DateTimeField(default=now)
     guid = models.CharField(max_length=36)  
     
-    workplace_types = models.JSONField(blank=True, null=True)
-
+    workplace_types = models.ManyToManyField(WorkplaceType, blank=True)
     def __str__(self):
         return f"{self.title} at {self.company_name}"

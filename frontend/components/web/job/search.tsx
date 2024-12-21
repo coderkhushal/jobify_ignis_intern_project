@@ -5,7 +5,7 @@ from .models import Job, WorkplaceType
 class WorkplaceTypeSerializer(serializers.ModelSerializer):
     class Meta:
         model = WorkplaceType
-        fields = '__all__' 
+        fields = ['id', 'name', 'description']
 
 
 class JobSerializer(serializers.ModelSerializer):
