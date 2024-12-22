@@ -2,7 +2,7 @@
 import { useState, useEffect, useCallback } from 'react'
 import axios, { AxiosResponse } from 'axios'
 
-export default function useQuery<T>(url: string) {
+export default function useQuery<T>(url: string, params?: Record<string, string>) {
   const [data, setData] = useState<T>()
   const [error, setError] = useState<string>()
   const [loading, setLoading] = useState(false)
@@ -21,7 +21,7 @@ export default function useQuery<T>(url: string) {
     }
 
     setLoading(true)
-    axios.get<T>(url).then(handleSuccess).catch(handleError)
+    axios.get<T>(url,{ params: params}).then(handleSuccess).catch(handleError)
   }, [url])
 
   useEffect(() => {

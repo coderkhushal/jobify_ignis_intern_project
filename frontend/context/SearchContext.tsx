@@ -1,5 +1,7 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client"
-import { FilterType } from "@/types";
+import useQuery from "@/hooks/useQuery";
+import { FilterType, JobType } from "@/types";
 import React, { createContext } from "react";
 
 
@@ -8,45 +10,52 @@ import React, { createContext } from "react";
 
 export type SearchContextType = {
     search: string;
-    setSearch: (search: string) => void;
+    setsearch: (search: string) => void;
     url: string;
-    filter: (f: FilterType) => void;
+    filter: () => void;
+    data: {results:JobType[]};
+    loading: boolean;
+    error: any;
+    
     };
     
     
 
 export const SearchContext = createContext<SearchContextType>({
     search: '',
-    setSearch: () => {},
-    url: 'http://localhost:8000/jobs/',
+    setsearch: () => {},
+    data: {results:[]},
+    loading: false,
+    error: null,
+
+    url: 'http://localhost:8000/api/jobs',
     filter: () => {},
 });
 
 
 export const SearchProvider = ({children}   :{children:React.ReactNode})=>{
     const[search, setSearch] = React.useState('')
-    
-    const [url , setUrl ] = React.useState<string>('http://localhost:8000/jobs/')
-    const filter = (f: FilterType ) =>{
-        if(f.title){
-            setUrl(url=> (url + `?title=${f.title}`))
-        }
-        if(f.workplace_type){
-            setUrl(url=> (url + `?workplace_type=${f.workplace_type}`))
-        }
-        if(f.min_salary){
-            setUrl(url=> (url + `?min_salary=${f.min_salary}`))
-        }
-        if(f.max_salary){
-            setUrl(url=> (url + `?max_salary=${f.max_salary}`))
-        }
-        if(f.page){
-            setUrl(url=> (url + `?page_number=${f.page}`))
-        }
 
+    const [filterjson, setFilterjson] = React.useState<FilterType>({})
+    
+    const [url , setUrl ] = React.useState<string>('http://localhost:8000/api/jobs')
+    const {data, loading , error, refetch } = useQuery<{results:JobType[]}>(url, ) 
+
+    const setsearch = (searchval : string)=>{
+        setFilterjson({title:searchval})
+        setSearch(searchval)
+    }
+    const filter = () =>{
+        const f: FilterType = filterjson
+        let tempurl = 'http://localhost:8000/api/jobs?'
+        for(const key  in f){
+            tempurl += `${key}=${f[key as keyof FilterType]}&`
+        }
+        setUrl(tempurl)
+        refetch()
     }
 
-    return <SearchContext.Provider value={{search , setSearch ,url , filter  }}>
+    return <SearchContext.Provider value={{search , setsearch ,url , filter, data: data || {results: []}, loading, error   }}>
         {children}
     </SearchContext.Provider>
 }

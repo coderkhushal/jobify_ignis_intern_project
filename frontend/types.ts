@@ -27,7 +27,7 @@ export type JobType = {
     is_remote: boolean;
     modified_date: string;  // ISO 8601 date string (e.g., "2024-12-01T12:00:00Z")
     guid: string;
-    workplace_types?: string[] | null;
+    workplace_types?: {id: string, name:string}[] | null;
 };
 export type FilterType = {
     title?: string;
