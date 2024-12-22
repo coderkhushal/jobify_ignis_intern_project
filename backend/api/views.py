@@ -27,7 +27,8 @@ class JobListView(APIView, PageNumberPagination):
         if company_name:
             jobs = jobs.filter(company_name__icontains=company_name)
         if workplace_type:
-            jobs = jobs.filter(workplace_types__name__icontains=workplace_type)
+            print(workplace_type)
+            jobs = jobs.filter(workplace_types__name__iexact=workplace_type.strip())
         if employment_type:
             jobs = jobs.filter(employment_type__icontains=employment_type)
         if min_salary:

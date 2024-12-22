@@ -5,7 +5,7 @@ export  type RoutesType = {
     href : string
     icon: IconType
 }
-export type Job = {
+export type JobType = {
     id: string;
     title: string;
     posted_date: string;  // ISO 8601 date string (e.g., "2024-12-01T10:00:00Z")
@@ -28,4 +28,12 @@ export type Job = {
     modified_date: string;  // ISO 8601 date string (e.g., "2024-12-01T12:00:00Z")
     guid: string;
     workplace_types?: string[] | null;
+};
+export type FilterType = {
+    title?: string;
+    min_salary?: string;
+    max_salary?: string;
+    workplace_type?: string;
+    page?: number;
+
 };

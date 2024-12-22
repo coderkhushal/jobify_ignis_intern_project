@@ -12,7 +12,7 @@ const Navbar= () => {
 					<div className="flex justify-between   w-full  items-center">
 						<Link className="font-black text-3xl px-10 " href="/">
 							{" "}
-							Remotify{" "}
+							Jobify{" "}
 						</Link>
                         <div></div>
 						<NavMenu  />
@@ -41,7 +41,7 @@ const NavMenu = () => {
 				</Link>
 			</li>
 		))}
-        
+
 	</ul>
 )
 }
