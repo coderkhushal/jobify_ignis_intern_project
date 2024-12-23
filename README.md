@@ -8,9 +8,12 @@ Platform to fetch jobs.
 
 
 
-## Demo
+## Screenshots
+![WhatsApp Image 2024-12-22 at 11 07 22 PM](https://github.com/user-attachments/assets/1dfce0e1-f79c-4129-976d-abbd3cbeeeef)
+![WhatsApp Image 2024-12-22 at 11 07 43 PM](https://github.com/user-attachments/assets/dd05d5cc-0b18-432a-a7e6-5a3a7602550b)
+![WhatsApp Image 2024-12-22 at 11 20 47 PM](https://github.com/user-attachments/assets/0a5a4456-5473-4bb6-8910-7648b607a270)
+![WhatsApp Image 2024-12-22 at 11 08 08 PM](https://github.com/user-attachments/assets/0a000a42-f963-4f0f-86b5-9a078ebf9837)
 
-Insert gif or link to demo
 
 
 ## Run Locally
